@@ -1,24 +1,67 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import ProfessorForm from './components/ProfessorForm';
+import ProfessorList from './components/ProfessorList';
+
+let initialState = [
+  {
+    id:0,
+    nome: '',
+    materia: '',
+  }
+];
 
 function App() {
+  const [professores, setProfessores] = useState(initialState);
+  const [professor, setProfessor] = useState({});
+  
+  function addProfessor(e) {
+    e.preventDefault();
+
+    const professor = {
+      id: document.getElementById ('idProf').value,
+      nome: document.getElementById ('nomeProf').value,
+      materia: document.getElementById('nomeMateria').value,
+    };
+
+    setProfessores([ ...professores, { ...professor}]);
+  }
+
+  function cancelarProfessor() {
+    setProfessor({id:0});
+  }
+
+  function atualizarProfessor(prof) {
+    setProfessores(professores.map(item => item.id === prof.id ? prof : item));
+    setProfessor({id:0});
+  }
+
+  function deletarProfessor(id) {
+    const professorFiltro = professores.filter(professor => professor.id !== id);
+    setProfessores([ ...professorFiltro]);
+  }
+
+  function editarProfessor(id) {
+    const professor = professores.filter((professor) => professor.id === id);
+    setProfessor(professor[0])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <>
+      <ProfessorForm
+          addProfessor={addProfessor}
+          atualizarProfessor={atualizarProfessor}
+          cancelarProfessor={cancelarProfessor}
+          profSelecionado={professor}
+          professores={professores}
+      />
+
+      <ProfessorList
+          professores={professores}
+          deletarProfessor={deletarProfessor}
+          editarProfessor={editarProfessor}
+      />
+   </>
   );
 }
 
