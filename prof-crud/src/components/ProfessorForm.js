@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 
 const professorInicial = {
-    id: 0,
+    id: '',
     nome:'',
     materia:'',
 };

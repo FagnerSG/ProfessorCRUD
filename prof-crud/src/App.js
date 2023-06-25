@@ -28,22 +28,28 @@ function App() {
   }
 
   function cancelarProfessor() {
-    setProfessor({id:0});
+    setProfessores([...professores]);
   }
 
-  function atualizarProfessor(prof) {
-    setProfessores(professores.map(item => item.id === prof.id ? prof : item));
+  function atualizarProfessor(professorAtualizado) {
+    setProfessores(
+      professores.map(item => 
+        item.id === professorAtualizado.id ? professorAtualizado : item));
     setProfessor({id:0});
   }
 
   function deletarProfessor(id) {
-    const professorFiltro = professores.filter(professor => professor.id !== id);
+    const professorFiltro = professores.filter(
+      (professor) => professor.id !== id);
     setProfessores([ ...professorFiltro]);
   }
 
   function editarProfessor(id) {
-    const professor = professores.filter((professor) => professor.id === id);
-    setProfessor(professor[0])
+    const professor = professores.find((professor) => professor.id === id);
+    if (professor) {
+      setProfessores([...professores]);
+      atualizarProfessor(professor);
+    }
   }
 
   return (
