@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import ProfessorForm from './components/ProfessorForm';
 import ProfessorList from './components/ProfessorList';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 let initialState = [
   {

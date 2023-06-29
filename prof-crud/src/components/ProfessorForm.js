@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 
+
 const professorInicial = {
     id: '',
     nome:'',
@@ -49,15 +50,17 @@ export default function ProfessorForm(props) {
     };
 
     return(
-        <form className='rowg-3' onSubmit={handleSubmit}>
-            <div className="row g-2 border">
+        <form className='container border' onSubmit={handleSubmit}>
+            <div className="row g-2">
+
+                
                     <div className='d-flex.justify-content-between '>
                             <h5 className='card-title shadow-sm '>
                                 CADASTRO DE PROFESSORES
                             </h5>
                     </div>
 
-                    <div className="col xs=auto ">           
+                    <div className="col xs=auto">           
                         <input 
                               name="idProf"
                               id='idProf' 
