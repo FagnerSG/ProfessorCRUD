@@ -14,7 +14,7 @@ let initialState = [
 
 function App() {
   const [professores, setProfessores] = useState(initialState);
-  const [professor, setProfessor] = useState({});
+  const [professorSelecionado, setProfessorSelecionado] = useState({});
   
   function addProfessor(e) {
     e.preventDefault();
@@ -29,26 +29,26 @@ function App() {
   }
 
   function cancelarProfessor() {
-    setProfessores([...professores]);
+    setProfessorSelecionado([...professores]);
   }
 
   function atualizarProfessor(professorAtualizado) {
     setProfessores(
-      professores.map(item => 
+      professores.map((item) => 
         item.id === professorAtualizado.id ? professorAtualizado : item));
-    setProfessor({id:0});
+    setProfessores({id:''});
   }
 
   function deletarProfessor(id) {
-    const professorFiltro = professores.filter(
+    const professorFiltrado = professores.filter(
       (professor) => professor.id !== id);
-    setProfessores([ ...professorFiltro]);
+    setProfessores([ ...professorFiltrado]);
   }
 
   function editarProfessor(id) {
     const professor = professores.find((professor) => professor.id === id);
     if (professor) {
-      setProfessores([...professores]);
+      setProfessorSelecionado([...professor]);
       atualizarProfessor(professor);
     }
   }
@@ -59,7 +59,7 @@ function App() {
           addProfessor={addProfessor}
           atualizarProfessor={atualizarProfessor}
           cancelarProfessor={cancelarProfessor}
-          profSelecionado={professor}
+          profSelecionado={professorSelecionado}
           professores={professores}
       />
 
